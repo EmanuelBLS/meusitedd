@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Do Manu pro Dudu - Terra</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      color: #000000;
+      background-image: url('IMG-20250418-WA0015 (1).jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 0px;
+      filter: brightness(0.4);
+      flex-direction: column;
+      text-align: center;
+      transition: filter 1s ease, background-position 0.1s ease;
+    }
+
+    body.vitoria {
+      filter: brightness(1.2);
+    }
+
+    .texto-container {
+      background-color: rgba(22, 15, 5, 0.85);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 700px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      margin-top: 2rem;
+      font-family: 'Times New Roman', Times, serif;
+      
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 5.4rem;
+       font-family: 'Times New Roman', Times, serif;
+      margin-bottom: 20px;
+      color: #d8c7a4;
+    }
+
+    h3 {
+      text-align: center;
+      font-size: 1.1rem;
+      font-family: 'Times New Roman', Times, serif;
+      margin-bottom: 20px;
+      color: #d8c7a4;
+      }
+
+    p {
+      font-size: 1.6rem;
+      line-height: 1.;
+      text-align: justify;
+      color: #e0d1a1;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .foto-casal {
+      width: 25%;
+      margin: 1px 0;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px  rgba(114, 56, 5, 0.747);
+      margin-right: 30px;
+    }
+
+    .foto-flor {
+      width: 25%;
+      margin: 1px 0;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(114, 56, 5, 0.747);
+      margin-right: 10px;
+    }
+
+    .foto-flor2 {
+      width: 19%;
+      margin: 1px 0;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(114, 56, 5, 0.747);
+      margin-left: 20px;
+    }
+
+
+    .jogo-container {
+      background-color: rgba(77, 49, 10, 0.85);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+      margin-top: 2rem;
+      display: none;
+    }
+
+    .palavra {
+      font-size: 2rem;
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .forca-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 3rem;
+    }
+
+    .forca-container span {
+      margin: 0 10px;
+    }
+
+    .tentativas {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .letras-incorretas {
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      color: red;
+    }
+
+    .input-letra {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+      padding: 0.5rem;
+    }
+
+    button {
+      font-size: 1.2rem;
+      padding: 0.5rem 1.5rem;
+      margin-top: 1rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .mensagem-final {
+      background-color: rgba(245, 238, 238, 0.8);
+      color: white;
+      font-size: 2rem;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+      display: none;
+      max-width: 500px;
+      margin: 20px auto;
+    }
+
+    .mensagem-final.vitoria {
+      background-color: #4CAF50;
+    }
+
+    .mensagem-final.derrota {
+      background-color: #F44336;
+    }
+
+    .hora-do-jogo {
+      font-size: 2rem;
+      color: #e0d1a1;
+      font-weight: bold;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="texto-container">
+    <h1>Terra</h1>
+    <p>
+  <h3>Te conhecer e te cultivar em mim <br>
+  é como cuidar do melhor fruto do meu jardim </h3><br>
+
+    </p>
+
+    <img class="foto-casal" src="c:\Users\Ell70\Downloads\IMG-20241118-WA0020.jpg" alt="Manu e Dudu">
+    <img class="foto-flor" src="c:\Users\Ell70\Downloads\20241125_172056.jpg" alt="Dudu do Manu">
+    <img class="foto-flor2" src="c:\Users\Ell70\Downloads\IMG-20240914-WA0053.jpg" alt="Manu do Manu">
+    <p>
+      Colho frutos doces e Saudaveis da nossa relaçao, obrigado por ser voce, suas raizes estao em mim.
+    </p>
+  </div>
+
+  <div class="hora-do-jogo" id="horaDoJogo">HORA DO JOGUE!</div>
+
+  <div class="jogo-container" id="jogoContainer">
+    <h1>Planta na mente!</h1>
+    <div class="palavra" id="palavra"></div>
+    <div class="forca-container" id="forca">
+      <span id="forca1">🌿</span>
+      <span id="forca2">🌿</span>
+      <span id="forca3">🌿</span>
+      <span id="forca4">🌿</span>
+      <span id="forca5">🌿</span>
+      <span id="forca6">🌿</span>
+    </div>
+    <div class="tentativas">Tentativas restantes: <span id="tentativas">6</span></div>
+    <input type="text" id="letra-input" class="input-letra" maxlength="1" placeholder="Digite uma letra">
+    <div class="letras-incorretas" id="letras-incorretas"></div>
+  </div>
+
+  <div class="mensagem-final" id="mensagemFinal"></div>
+
+  <script>
+    const plantas = ['rosa', 'margarida', 'violeta', 'cacto', 'orquidea', 'begonia', 'gloxinia', 'rosa do deserto'];
+    let palavraEscolhida = plantas[Math.floor(Math.random() * plantas.length)].toUpperCase();
+    let palavraOculta = Array(palavraEscolhida.length).fill('_');
+    let tentativasRestantes = 6;
+    let letrasErradas = [];
+    let vitorias = 0;
+    let mensagemEspecialMostrada = false;
+
+    const palavraElement = document.getElementById('palavra');
+    const tentativasElement = document.getElementById('tentativas');
+    const letrasIncorretasElement = document.getElementById('letras-incorretas');
+    const forcaElement = document.getElementById('forca');
+    const mensagemFinal = document.getElementById('mensagemFinal');
+    const jogoContainer = document.getElementById('jogoContainer');
+    const horaDoJogo = document.getElementById('horaDoJogo');
+
+    function atualizarPalavra() {
+      palavraElement.innerHTML = palavraOculta.join(' ');
+    }
+
+    function verificarLetra() {
+      const letraInput = document.getElementById('letra-input');
+      const letra = letraInput.value.toUpperCase();
+      letraInput.value = '';
+
+      if (letra && !letrasErradas.includes(letra) && palavraEscolhida.includes(letra)) {
+        for (let i = 0; i < palavraEscolhida.length; i++) {
+          if (palavraEscolhida[i] === letra) {
+            palavraOculta[i] = letra;
+          }
+        }
+        atualizarPalavra();
+      } else if (letra && !letrasErradas.includes(letra)) {
+        letrasErradas.push(letra);
+        tentativasRestantes--;
+        tentativasElement.textContent = tentativasRestantes;
+
+        const forcaParts = ['forca1', 'forca2', 'forca3', 'forca4', 'forca5', 'forca6'];
+        document.getElementById(forcaParts[6 - tentativasRestantes]).style.color = 'red';
+      }
+
+      letrasIncorretasElement.innerHTML = `Letras incorretas: ${letrasErradas.join(', ')}`;
+
+      if (tentativasRestantes <= 0) {
+        mensagemFinal.textContent = `Você perdeu! A palavra era: ${palavraEscolhida}`;
+        mensagemFinal.classList.add('derrota');
+        mensagemFinal.style.display = 'block';
+        reiniciarJogo();
+      }
+
+      if (!palavraOculta.includes('_')) {
+        vitorias++;
+        mensagemFinal.innerHTML = `🎉 <strong>Você venceu!</strong> A palavra era: <em>${palavraEscolhida}</em> 🎉`;
+        mensagemFinal.classList.add('vitoria');
+        mensagemFinal.style.display = 'block';
+
+        confetti({ particleCount: 200, spread: 70, origin: { y: 0.6 } });
+        document.body.classList.add('vitoria');
+        setTimeout(() => document.body.classList.remove('vitoria'), 3000);
+
+        // Mensagem especial ao vencer 3 vezes
+        if (vitorias === 3 && !mensagemEspecialMostrada) {
+          setTimeout(() => {
+            alert("Ba Sing Se – Guarde isso com carinho.");
+            mensagemEspecialMostrada = true;
+          }, 500);
+        }
+
+        reiniciarJogo();
+      }
+    }
+
+    function reiniciarJogo() {
+      setTimeout(() => {
+        palavraEscolhida = plantas[Math.floor(Math.random() * plantas.length)].toUpperCase();
+        palavraOculta = Array(palavraEscolhida.length).fill('_');
+        tentativasRestantes = 6;
+        letrasErradas = [];
+        tentativasElement.textContent = tentativasRestantes;
+        letrasIncorretasElement.innerHTML = '';
+        atualizarPalavra();
+
+        const forcaParts = ['forca1', 'forca2', 'forca3', 'forca4', 'forca5', 'forca6'];
+        for (let i = 0; i < forcaParts.length; i++) {
+          document.getElementById(forcaParts[i]).style.color = '';
+        }
+
+        mensagemFinal.style.display = 'none';
+      }, 3000);
+    }
+
+    document.getElementById('letra-input').addEventListener('input', verificarLetra);
+
+    setTimeout(() => {
+      horaDoJogo.style.display = 'none';
+      jogoContainer.style.display = 'block';
+      atualizarPalavra();
+    }, 2000);
+
+    document.addEventListener('mousemove', (e) => {
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+      const posX = 50 - (x * 10);
+      const posY = 50 - (y * 10);
+      document.body.style.backgroundPosition = `${posX}% ${posY}%`;
+    });
+  </script>
+</body>
+</html>
